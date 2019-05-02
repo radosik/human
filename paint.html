@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <canvas style="border:1px solid #ccc;cursor:crosshair;" id="tablet"></canvas>
+</head>
+
+<body style="margin: 0; padding: 0; outline: 0; line-height: 0; overflow:hidden;">
+    <script>
+
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        const canvas = document.getElementById("tablet");
+        canvas.setAttribute('width', w - 2);
+        canvas.setAttribute('height', h - 2);
+
+        function init() {
+
+            var paint = false;
+
+            const cubes = {
+                width: 20,
+                height: 20,
+                step: 10,
+                beginX: 10,
+                beginY: 10
+            }
+
+            const colors = ['black', 'blue', 'red', 'green', 'yellow'];
+
+            var ctx = tablet.getContext('2d');
+
+            function Cubes() {
+                for (let i = 0; i < colors.length; i++) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = colors[i];
+                    ctx.fillStyle = colors[i];
+                    ctx.rect(cubes.beginX, cubes.beginY + i * (cubes.height + cubes.step), cubes.width, cubes.height);
+                    ctx.fill();
+                    ctx.stroke();
+                }
+            }
+
+            function colorCubes(x, y, button) {
+                let responce = false;
+                if (x >= cubes.beginX && x <= cubes.beginX + cubes.width) {
+                    for (let i = 0; i < colors.length; i++) {
+                        if (y >= cubes.beginY + i * (cubes.height + cubes.step) && y <= cubes.beginY + i * (cubes.height + cubes.step) + cubes.height) {
+                            responce = colors[i];
+                        }
+                    }
+                }
+                return responce;
+            }
+
+            function Down(e) {
+                const deltaX = e.pageX - this.offsetLeft;
+                const deltaY = e.pageY - this.offsetTop;
+                let color;
+                if (e.button === 0) {
+                    color = colorCubes(deltaX, deltaY, 0);
+                    if (color) {
+                        ctx.strokeStyle = color;
+                    } else {
+                        paint = true;
+                        ctx.beginPath();
+                        ctx.moveTo(deltaX, deltaY);
+                    }
+                } else if (e.button === 4) {
+                    ctx.lineWidth++;
+                    if (ctx.lineWidth++) 
+                        ctx.strokeStyle = "white";
+                        ctx.fillStyle = "white";
+                        ctx.fillRect(20, 876, 150, 30);
+                        ctx.fillStyle = "black";
+                        ctx.strokeStyle = "black";
+                        ctx.font = "30px Arial";
+                        ctx.fillText(ctx.lineWidth++ + "px", 20, 900);   
+                        ctx.beginPath();
+                        ctx.moveTo(90, 890);
+                        ctx.lineTo(150, 890); 
+                        ctx.stroke();          
+                } else if (e.button === 3) {
+                    ctx.lineWidth--;
+                    ctx.strokeStyle = "white";
+                    ctx.fillStyle = "white";
+                    ctx.fillRect(20, 876, 100, 30);
+                    ctx.fillStyle = "black";
+                    ctx.strokeStyle = "black";
+                    ctx.font = "30px Arial";
+                    ctx.fillText(ctx.lineWidth-- + "px", 20, 900);
+                    ctx.beginPath();
+                    ctx.moveTo(90, 890);
+                    ctx.lineTo(150, 890); 
+                    ctx.stroke(); 
+                }
+            }
+
+
+            function Up(e) {
+                paint = false;
+                ctx.closePath();
+            }
+
+            function Move(e) {
+                if (paint == true) {
+                    ctx.lineTo(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+                    ctx.stroke();
+                }
+            }
+
+            Cubes();
+
+            ctx.strokeStyle = colors[0];
+
+            tablet.addEventListener("mousedown", Down);
+            tablet.addEventListener("mouseup", Up);
+            tablet.addEventListener("mousemove", Move);
+            //tablet.addEventListener("mouse");
+
+        }
+
+        init();
+
+    </script>
+</body>
+
+</html>
