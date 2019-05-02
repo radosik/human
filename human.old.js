@@ -1,13 +1,3 @@
-class Human {
-    constructor(x, y, height) {
-        this.mult = 2;
-        this.x = x * this.mult;
-        this.y = y * this.mult;
-        self = this;
-    }
-}
-
-
 function init() {
     ctx.beginPath();
     ctx.arc(200, 50, 30, 0, Math.PI * 2, true);
@@ -46,6 +36,3 @@ function init() {
     ctx.lineTo(200, 320);
     ctx.stroke(); // legs 2
 }
-init();
-
-export default Human;
