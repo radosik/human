@@ -9,4 +9,6 @@ canvas.setAttribute('height', h - 2);
 
 const ctx = tablet.getContext('2d');
 
+const modelOne = new Human(100,100,180);
+
 

@@ -1,0 +1,23 @@
+{
+  "name": "human",
+  "version": "1.0.0",
+  "description": "human skeleton animation",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-ramos/human.git"
+  },
+  "author": "radosik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/web-ramos/human/issues"
+  },
+  "homepage": "https://github.com/web-ramos/human#readme",
+  "devDependencies": {
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
+  },
+  "scripts": { 
+    "build": "webpack" 
+  } 
+}
